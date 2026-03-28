@@ -1,6 +1,6 @@
 "use client";
 
-import { xpToNextLevel } from "@/lib/progression";
+import { levelProgressSummary } from "@/lib/progression";
 import { DAILY_QUEST_WORD_COUNT } from "@/lib/seed";
 
 type Props = {
@@ -23,9 +23,9 @@ export function PlayerHud({
   xp,
   dailyQuest,
 }: Props) {
-  const { level, currentStart, nextAt } = xpToNextLevel(xp);
-  const span = Math.max(1, nextAt - currentStart);
-  const pct = Math.min(100, Math.round(((xp - currentStart) / span) * 100));
+  const prog = levelProgressSummary(xp);
+  const span = Math.max(1, prog.nextLevelAt - prog.currentStart);
+  const pct = Math.min(100, Math.round(((xp - prog.currentStart) / span) * 100));
 
   return (
     <div className="lex-card mb-6 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
@@ -65,18 +65,29 @@ export function PlayerHud({
         )}
       </div>
       <div className="min-w-[220px] flex-1 sm:max-w-md">
-        <div className="flex justify-between text-ui-sm font-medium text-[var(--muted-2)]">
-          <span>Level {level}</span>
-          <span>
-            {xp} XP · next {nextAt}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 text-ui-sm font-medium text-[var(--muted-2)]">
+          <span>Level {prog.level}</span>
+          <span className="tabular-nums text-[var(--text)]">
+            {prog.xp.toLocaleString()} / {prog.nextLevelAt.toLocaleString()} XP
           </span>
         </div>
+        <p className="mt-1 text-ui-sm leading-snug text-[var(--muted)]">
+          {prog.xpToNext > 0 ? (
+            <span className="tabular-nums">
+              +{prog.xpToNext.toLocaleString()} XP to Level {prog.nextLevel}
+            </span>
+          ) : (
+            <span>At next level threshold</span>
+          )}
+        </p>
         <div
           className="mt-2 h-3 overflow-hidden rounded-full bg-[var(--accent-ink)]"
           role="progressbar"
           aria-valuenow={pct}
           aria-valuemin={0}
           aria-valuemax={100}
+          aria-valuetext={`${prog.xp.toLocaleString()} XP of ${prog.nextLevelAt.toLocaleString()} toward level ${prog.nextLevel}`}
+          aria-label={`XP toward level ${prog.nextLevel}: ${prog.xp.toLocaleString()} total, ${prog.xpToNext.toLocaleString()} XP remaining until ${prog.nextLevelAt.toLocaleString()}`}
         >
           <div
             className="h-full rounded-full bg-[var(--accent)] transition-all duration-300"

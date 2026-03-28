@@ -1,5 +1,6 @@
 "use client";
 
+import { SummaryFold } from "@/components/SummaryFold";
 import type { LeaderRow } from "@/lib/mastery";
 import type { ActivityRow } from "@/lib/dashboardActivity";
 import type { HistoryInsights } from "@/lib/insights";
@@ -187,113 +188,199 @@ export function SerenHomeDashboard({
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="lex-section-lbl">Today&apos;s Quest</div>
-          <div className="lex-panel">
-            <div className="lex-panel-head">
-              <div>
-                <div className="lex-panel-title">Daily Quest</div>
-                <div className="lex-panel-sub">
-                  {dailyQualifiedToday ? "Completed today — streak updated" : "Complete all words to extend streak"}
-                </div>
-              </div>
+          <SummaryFold
+            kicker="Daily path"
+            title="Daily Quest"
+            subtitle={
+              dailyQualifiedToday
+                ? "Completed today — streak updated. Expand for the full trail."
+                : wordsLeft > 0
+                  ? `${wordsLeft} word${wordsLeft === 1 ? "" : "s"} left — expand to play the next step.`
+                  : "Open to see today’s trail or jump in from Modes."
+            }
+            defaultOpen
+            meta={
               <span className="flex items-center text-[10px] font-bold text-[var(--success)]">
                 <span className="lex-live-dot" />
                 LIVE
               </span>
-            </div>
-            {dailyWords.map((w, i) => {
-              const st = rowState(i);
-              const ic = st === "done" ? "✓" : st === "cur" ? "→" : "·";
-              return (
-                <div
-                  key={w}
-                  className={`lex-dw-row ${st === "cur" ? "lex-dw-row-click" : ""}`}
-                  onClick={st === "cur" ? () => onOpenDailyWord(w) : undefined}
-                  onKeyDown={
-                    st === "cur"
-                      ? (e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            onOpenDailyWord(w);
+            }
+          >
+            <div className="grid gap-3 pt-2 sm:grid-cols-2">
+              {dailyWords.map((w, i) => {
+                const st = rowState(i);
+                const ic = st === "done" ? "✓" : st === "cur" ? "▶" : "🔒";
+                const rom = tamilToTanglish(w).trim();
+                const clickable = st === "cur";
+                return (
+                  <div
+                    key={w}
+                    className={`flex min-h-[112px] gap-3 rounded-2xl border-2 p-3 md:min-h-[120px] md:gap-4 md:p-4 ${
+                      st === "done"
+                        ? "border-[color-mix(in_srgb,var(--success)_45%,var(--border))] bg-[color-mix(in_srgb,var(--success)_10%,var(--card))] shadow-[0_3px_0_color-mix(in_srgb,var(--success)_28%,transparent)]"
+                        : st === "cur"
+                          ? "cursor-pointer border-[color-mix(in_srgb,var(--gold)_50%,var(--border))] bg-[color-mix(in_srgb,var(--gold-bg)_65%,var(--card))] shadow-[0_4px_0_color-mix(in_srgb,var(--gold)_30%,transparent)] transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
+                          : "border-[var(--border)] bg-[color-mix(in_srgb,var(--card-elevated)_92%,var(--bg))] opacity-[0.88]"
+                    }`}
+                    onClick={clickable ? () => onOpenDailyWord(w) : undefined}
+                    onKeyDown={
+                      clickable
+                        ? (e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              onOpenDailyWord(w);
+                            }
                           }
-                        }
-                      : undefined
-                  }
-                  role={st === "cur" ? "button" : undefined}
-                  tabIndex={st === "cur" ? 0 : undefined}
-                >
-                  <span className="lex-dw-idx">{String(i + 1).padStart(2, "0")}</span>
-                  <div className={`lex-dw-ring ${st}`}>{ic}</div>
-                  <span className="lex-dw-word">{w}</span>
-                  <span className="lex-dw-gloss">{glossPreview(w)}</span>
-                  <span className="lex-dw-xp">+12</span>
-                </div>
-              );
-            })}
-          </div>
+                        : undefined
+                    }
+                    role={clickable ? "button" : undefined}
+                    tabIndex={clickable ? 0 : undefined}
+                  >
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg md:h-14 md:w-14 md:text-xl ${
+                        st === "done"
+                          ? "bg-[color-mix(in_srgb,var(--success)_18%,var(--card))] text-[var(--success)] ring-2 ring-[color-mix(in_srgb,var(--success)_35%,transparent)]"
+                          : st === "cur"
+                            ? "bg-[color-mix(in_srgb,var(--gold)_22%,var(--card))] text-[var(--gold)] ring-2 ring-[color-mix(in_srgb,var(--gold)_40%,transparent)]"
+                            : "bg-[var(--border-muted)] text-[var(--muted)] grayscale-[0.2]"
+                      }`}
+                      aria-hidden
+                    >
+                      {ic}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                        <span className="font-body text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-tamil text-lg font-bold text-[var(--text)] md:text-xl">{w}</span>
+                        {rom ? (
+                          <span className="font-body text-xs font-medium text-[color-mix(in_srgb,var(--muted)_35%,var(--text))]">
+                            ({rom})
+                          </span>
+                        ) : null}
+                      </div>
+                      <p className="mt-1.5 line-clamp-2 text-xs font-medium leading-snug text-[color-mix(in_srgb,var(--muted)_25%,var(--text))] md:text-sm">
+                        {glossPreview(w)}
+                      </p>
+                      <span className="mt-2 inline-block rounded-full border border-[color-mix(in_srgb,var(--gold)_35%,var(--border))] bg-[var(--gold-bg)] px-2.5 py-0.5 text-[10px] font-bold text-[var(--gold)]">
+                        +12 XP
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </SummaryFold>
 
-          <div className="lex-section-lbl">Recent Activity</div>
-          <div className="lex-panel">
-            {activity.map((a) => (
-              <div key={a.id} className="lex-act-row">
-                <div className={`lex-act-dot ${a.kind === "ok" ? "ok" : a.kind === "badge" ? "bd" : "bad"}`}>
-                  {a.kind === "ok" ? "✓" : a.kind === "badge" ? "🎖" : "✗"}
-                </div>
-                <div className="lex-act-text">
-                  <strong className="font-tamil text-[var(--text)]">{a.word}</strong> {a.detail}
-                </div>
-                <div className="lex-act-time">{a.timeLabel}</div>
-              </div>
-            ))}
-          </div>
+          <SummaryFold
+            kicker="Feed"
+            title="Recent activity"
+            subtitle={`${activity.length} line${activity.length === 1 ? "" : "s"} — rounds, XP, and misses from your last sessions.`}
+            defaultOpen={false}
+            meta={<span aria-hidden>📜</span>}
+          >
+            <ul className="grid gap-3 pt-2">
+              {activity.map((a) => {
+                const rom = tamilToTanglish(a.word).trim();
+                const emoji = a.kind === "ok" ? "✅" : a.kind === "badge" ? "🎖️" : "💥";
+                return (
+                  <li
+                    key={a.id}
+                    className={`flex gap-3 rounded-2xl border-2 p-3 md:p-4 ${
+                      a.kind === "ok"
+                        ? "border-[color-mix(in_srgb,var(--success)_40%,var(--border))] bg-[color-mix(in_srgb,var(--success)_8%,var(--card))]"
+                        : a.kind === "badge"
+                          ? "border-[color-mix(in_srgb,var(--gold)_45%,var(--border))] bg-[color-mix(in_srgb,var(--gold-bg)_50%,var(--card))]"
+                          : "border-[color-mix(in_srgb,var(--danger)_35%,var(--border))] bg-[color-mix(in_srgb,var(--danger)_6%,var(--card))]"
+                    }`}
+                  >
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[color-mix(in_srgb,var(--card-elevated)_80%,transparent)] text-xl shadow-sm"
+                      aria-hidden
+                    >
+                      {emoji}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                        <strong className="font-tamil text-base font-bold text-[var(--text)] md:text-lg">{a.word}</strong>
+                        {rom ? (
+                          <span className="font-body text-xs font-medium text-[var(--muted)]">({rom})</span>
+                        ) : null}
+                      </div>
+                      <p className="mt-1 text-sm font-medium leading-relaxed text-[color-mix(in_srgb,var(--muted)_20%,var(--text))]">
+                        {a.detail}
+                      </p>
+                    </div>
+                    <div className="shrink-0 self-start text-right text-[11px] font-semibold tabular-nums text-[var(--muted)]">
+                      {a.timeLabel}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </SummaryFold>
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="lex-section-lbl">Leaderboard</div>
-          <div className="lex-panel">
-            <div className="lex-panel-head">
-              <div>
-                <div className="lex-panel-title">Weekly Rankings</div>
-                <div className="lex-panel-sub">Local device · event code</div>
-              </div>
-              <span className="text-[10px] font-bold text-[var(--gold)]">TOP 5</span>
-            </div>
-            {lbDisplay.length === 0 ? (
-              <div className="px-4 py-6 text-center text-xs text-[var(--muted)]">Play Arcade or Boss and save a score.</div>
-            ) : (
-              lbDisplay.map((p) => (
-                <div key={`${p.nick}-${p.rk}`} className={`lex-lb-row ${p.me ? "lex-lb-row-me" : ""}`}>
-                  <span className="lex-lb-rank">{p.rk <= 3 ? ["🥇", "🥈", "🥉"][p.rk - 1] : p.rk}</span>
-                  <div className="lex-lb-av" style={{ background: p.col }}>
-                    {p.av}
+          <SummaryFold
+            kicker="Arena"
+            title="Weekly rankings"
+            subtitle="Local device · top scores from Arcade & Boss."
+            defaultOpen={false}
+            meta={<span className="text-[10px] font-bold text-[var(--gold)]">TOP 5</span>}
+          >
+            <div className="overflow-hidden rounded-xl border border-[var(--border)] pt-2">
+              {lbDisplay.length === 0 ? (
+                <div className="px-4 py-8 text-center text-sm text-[var(--muted)]">
+                  Play Arcade or Boss and save a score.
+                </div>
+              ) : (
+                lbDisplay.map((p) => (
+                  <div key={`${p.nick}-${p.rk}`} className={`lex-lb-row ${p.me ? "lex-lb-row-me" : ""}`}>
+                    <span className="lex-lb-rank">{p.rk <= 3 ? ["🥇", "🥈", "🥉"][p.rk - 1] : p.rk}</span>
+                    <div className="lex-lb-av" style={{ background: p.col }}>
+                      {p.av}
+                    </div>
+                    <span className="lex-lb-name">
+                      {p.nick}
+                      {p.me ? " (you)" : ""}
+                    </span>
+                    <span className="lex-lb-sc">{p.score.toLocaleString()}</span>
                   </div>
-                  <span className="lex-lb-name">
-                    {p.nick}
-                    {p.me ? " (you)" : ""}
-                  </span>
-                  <span className="lex-lb-sc">{p.score.toLocaleString()}</span>
-                </div>
-              ))
-            )}
-          </div>
-
-          <div className="lex-section-lbl">Word of the Day</div>
-          <div className="lex-wod">
-            <div className="lex-wod-label">✦ Word of the Day</div>
-            <div className="lex-wod-word">{wotd || "—"}</div>
-            <div className="lex-wod-rom">{wotd ? tamilToTanglish(wotd) : ""}</div>
-            <div>
-              {wotdSeed?.senses.map((s, i) => (
-                <div key={s.id} className="lex-wod-m">
-                  <span className="lex-wod-num">{i + 1}.</span>
-                  <span>
-                    {s.glossEn}
-                    {s.meaningTa ? ` — ${s.meaningTa}` : ""}
-                  </span>
-                </div>
-              )) ?? <div className="lex-wod-m text-[var(--muted)]">No seed entry for today.</div>}
+                ))
+              )}
             </div>
-          </div>
+          </SummaryFold>
+
+          <SummaryFold
+            kicker="Lexicon"
+            title="Word of the Day"
+            subtitle={
+              wotd
+                ? `${wotd} (${tamilToTanglish(wotd)}) — two senses to savour.`
+                : "No lemma queued for today."
+            }
+            defaultOpen
+            meta={<span aria-hidden>✦</span>}
+          >
+            <div className="lex-wod pt-2">
+              <div className="lex-wod-label">✦ Word of the Day</div>
+              <div className="lex-wod-word">{wotd || "—"}</div>
+              <div className="lex-wod-rom">{wotd ? tamilToTanglish(wotd) : ""}</div>
+              <div>
+                {wotdSeed?.senses.map((s, i) => (
+                  <div key={s.id} className="lex-wod-m">
+                    <span className="lex-wod-num">{i + 1}.</span>
+                    <span>
+                      {s.glossEn}
+                      {s.meaningTa ? ` — ${s.meaningTa}` : ""}
+                    </span>
+                  </div>
+                )) ?? <div className="lex-wod-m text-[var(--muted)]">No seed entry for today.</div>}
+              </div>
+            </div>
+          </SummaryFold>
         </div>
       </div>
     </div>

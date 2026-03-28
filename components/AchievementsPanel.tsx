@@ -1,5 +1,6 @@
 "use client";
 
+import { SummaryFold } from "@/components/SummaryFold";
 import { ACHIEVEMENTS, type AchievementId, loadUnlocked } from "@/lib/achievements";
 
 const BADGE: Record<AchievementId, string> = {
@@ -15,30 +16,25 @@ const BADGE: Record<AchievementId, string> = {
 export function AchievementsPanel({ version = 0 }: { version?: number }) {
   const unlocked = loadUnlocked();
   void version;
+  const nUnlocked = ACHIEVEMENTS.filter((a) => unlocked.has(a.id)).length;
 
   return (
-    <section className="lex-achievements-panel overflow-hidden rounded-2xl border-2 border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] bg-[color-mix(in_srgb,var(--card)_96%,var(--gold-bg))] p-5 shadow-[0_10px_36px_color-mix(in_srgb,var(--accent)_8%,transparent)] md:p-7">
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-[var(--border)] pb-4">
-        <div>
-          <p className="font-body text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-            Your milestones
-          </p>
-          <h3 className="font-headline mt-1 text-2xl font-bold tracking-tight text-[var(--text)] md:text-[1.65rem]">
-            Achievements
-          </h3>
-          <p className="mt-2 max-w-xl text-sm font-medium leading-relaxed text-[color-mix(in_srgb,var(--muted)_35%,var(--text))]">
-            Earn badges as you master polysemy — perfect rounds, streaks, runs, and drag skills.
-          </p>
-        </div>
+    <SummaryFold
+      className="bg-[color-mix(in_srgb,var(--card)_96%,var(--gold-bg))]"
+      kicker="Your milestones"
+      title="Achievements"
+      subtitle={`${nUnlocked}/${ACHIEVEMENTS.length} unlocked — expand to see every badge and how to earn it.`}
+      defaultOpen={false}
+      meta={
         <div
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[color-mix(in_srgb,var(--gold)_22%,var(--card))] text-3xl shadow-inner md:h-16 md:w-16 md:text-4xl"
+          className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[color-mix(in_srgb,var(--gold)_22%,var(--card))] text-2xl shadow-inner md:h-12 md:w-12 md:text-3xl"
           aria-hidden
         >
           🎖️
         </div>
-      </div>
-
-      <ul className="grid gap-4 sm:grid-cols-2">
+      }
+    >
+      <ul className="grid gap-4 pt-2 sm:grid-cols-2">
         {ACHIEVEMENTS.map((a) => {
           const ok = unlocked.has(a.id);
           const emoji = BADGE[a.id];
@@ -85,6 +81,6 @@ export function AchievementsPanel({ version = 0 }: { version?: number }) {
           );
         })}
       </ul>
-    </section>
+    </SummaryFold>
   );
 }

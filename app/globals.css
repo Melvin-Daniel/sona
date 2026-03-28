@@ -1359,71 +1359,143 @@ html.seren .lex-header-comfort .lex-header-icon-btn {
 }
 
 html.seren .lex-player-strip-comfort {
-  padding-top: 1.15rem;
-  padding-bottom: 1.15rem;
-  gap: 1rem 1.25rem;
+  padding-top: 1.35rem;
+  padding-bottom: 1.35rem;
+  gap: 1.15rem 1.35rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-p-av {
-  width: 3rem;
-  height: 3rem;
-  font-size: 15px;
+  width: 3.75rem;
+  height: 3.75rem;
+  font-size: 1.15rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-p-av {
+    width: 4.25rem;
+    height: 4.25rem;
+    font-size: 1.25rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-p-name-input {
-  font-size: 1.05rem;
-  max-width: 280px;
+  font-size: 1.2rem;
+  max-width: min(100%, 300px);
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-p-name-input {
+    font-size: 1.35rem;
+    max-width: 340px;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-p-hint {
-  font-size: 13px;
+  font-size: 0.875rem;
 }
 
 html.seren .lex-player-strip-comfort .lex-p-sub {
-  font-size: 13px;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-p-sub {
+    font-size: 0.9375rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-streak-pill {
-  font-size: 14px;
-  padding: 0.4rem 0.85rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-streak-pill {
+    font-size: 1.0625rem;
+    padding: 0.55rem 1.1rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-daily-lbl {
-  font-size: 11px;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-daily-lbl {
+    font-size: 0.8125rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-xp-lbl {
-  font-size: 11px;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-xp-lbl {
+    font-size: 0.8125rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-bar-track {
-  height: 9px;
+  height: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-bar-track {
+    height: 1rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-xp-bar-wrap {
-  width: 160px;
+  min-width: 220px;
 }
 
 @media (min-width: 768px) {
   html.seren .lex-player-strip-comfort .lex-xp-bar-wrap {
-    width: 180px;
+    min-width: 260px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-player-strip-comfort .lex-xp-bar-wrap {
+    min-width: 300px;
   }
 }
 
 html.seren .lex-player-strip-comfort .lex-lvl-badge {
-  font-size: 14px;
-  padding: 0.45rem 1rem;
+  font-size: 1rem;
+  padding: 0.65rem 1.15rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-lvl-badge {
+    font-size: 1.0625rem;
+    padding: 0.7rem 1.25rem;
+  }
 }
 
 html.seren .lex-player-strip-comfort .lex-daily-wrap {
   min-width: 0;
-  flex: 1 1 220px;
+  flex: 1 1 240px;
   max-width: none;
 }
 
 @media (min-width: 1024px) {
   html.seren .lex-player-strip-comfort .lex-daily-wrap {
-    max-width: 420px;
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html.seren .lex-player-strip-comfort .lex-daily-wrap {
+    max-width: 520px;
   }
 }
 

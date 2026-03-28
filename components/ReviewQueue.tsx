@@ -1,5 +1,8 @@
 "use client";
 
+import { SummaryFold } from "@/components/SummaryFold";
+import { tamilToTanglish } from "@/lib/tanglish";
+
 type Props = {
   words: string[];
   /** Optional coaching line from session insights (e.g. dominant distractor type). */
@@ -9,35 +12,25 @@ type Props = {
 
 export function ReviewQueue({ words, coachLine, onPractice }: Props) {
   if (!words.length) return null;
+
   return (
-    <section className="lex-review-queue overflow-hidden rounded-2xl border-2 border-[color-mix(in_srgb,var(--accent)_25%,var(--border))] bg-[var(--card)] p-5 shadow-[0_10px_36px_color-mix(in_srgb,var(--accent)_7%,transparent)] md:p-7">
-      <div className="mb-5 flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border)] pb-4">
-        <div className="min-w-0">
-          <p className="font-body text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-            Smart practice
-          </p>
-          <h3 className="font-headline mt-1 flex flex-wrap items-center gap-2 text-2xl font-bold tracking-tight text-[var(--text)] md:text-[1.65rem]">
-            <span className="text-[1.35em] leading-none" aria-hidden>
-              📚
-            </span>
-            Review queue
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-[color-mix(in_srgb,var(--muted)_30%,var(--text))] md:text-base">
-            Words worth another look — pulled from <strong className="text-[var(--text)]">mastery</strong> and your{" "}
-            <strong className="text-[var(--text)]">recent weak spots</strong>. Tap a card to open it in Play.
-          </p>
-        </div>
+    <SummaryFold
+      kicker="Smart practice"
+      title="Review queue"
+      subtitle="Words from mastery and weak spots — tap a card to open in Play."
+      defaultOpen={false}
+      meta={
         <div
-          className="hidden shrink-0 rounded-2xl bg-[color-mix(in_srgb,var(--accent)_10%,var(--card-elevated))] px-4 py-3 text-center sm:block"
+          className="shrink-0 rounded-2xl bg-[color-mix(in_srgb,var(--accent)_10%,var(--card-elevated))] px-2.5 py-1.5 text-center sm:px-3 sm:py-2"
           aria-hidden
         >
-          <div className="text-2xl font-bold text-[var(--accent)]">{words.length}</div>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">queued</div>
+          <div className="text-lg font-bold text-[var(--accent)] sm:text-xl">{words.length}</div>
+          <div className="text-[8px] font-bold uppercase tracking-wider text-[var(--muted)] sm:text-[9px]">queued</div>
         </div>
-      </div>
-
+      }
+    >
       {coachLine ? (
-        <div className="mb-5 flex gap-3 rounded-xl border-2 border-[color-mix(in_srgb,var(--gold)_45%,var(--border))] bg-[color-mix(in_srgb,var(--gold-bg)_88%,var(--card))] p-4 md:p-5">
+        <div className="mb-4 flex gap-3 rounded-2xl border-2 border-[color-mix(in_srgb,var(--gold)_45%,var(--border))] bg-[color-mix(in_srgb,var(--gold-bg)_88%,var(--card))] p-4 md:p-5">
           <span className="text-2xl leading-none" aria-hidden>
             💡
           </span>
@@ -45,25 +38,41 @@ export function ReviewQueue({ words, coachLine, onPractice }: Props) {
         </div>
       ) : null}
 
-      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
-        {words.map((w) => (
-          <li key={w}>
-            <button
-              type="button"
-              onClick={() => onPractice(w)}
-              className="group flex w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 border-[color-mix(in_srgb,var(--accent)_30%,var(--border))] bg-[color-mix(in_srgb,var(--card-elevated)_85%,var(--accent))] px-3 py-5 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[color-mix(in_srgb,var(--accent)_8%,var(--card))] hover:shadow-md motion-reduce:transform-none md:py-6"
-            >
-              <span className="text-lg opacity-80 transition-opacity group-hover:opacity-100" aria-hidden>
-                ▶
-              </span>
-              <span className="font-tamil text-lg font-bold leading-tight text-[var(--accent)] md:text-xl">{w}</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] group-hover:text-[var(--accent)]">
-                Practice
-              </span>
-            </button>
-          </li>
-        ))}
+      <ul className="grid gap-4 pt-1 sm:grid-cols-2">
+        {words.map((w) => {
+          const rom = tamilToTanglish(w).trim();
+          return (
+            <li key={w}>
+              <button
+                type="button"
+                onClick={() => onPractice(w)}
+                className="lex-review-queue-card flex min-h-[118px] w-full gap-4 rounded-2xl border-2 border-[color-mix(in_srgb,var(--accent)_35%,var(--border))] bg-[color-mix(in_srgb,var(--card-elevated)_88%,var(--accent))] p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[color-mix(in_srgb,var(--accent)_10%,var(--card))] hover:shadow-md motion-reduce:transform-none md:min-h-[128px] md:p-5"
+              >
+                <div
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[color-mix(in_srgb,var(--accent)_14%,var(--card))] text-2xl shadow-sm ring-2 ring-[color-mix(in_srgb,var(--accent)_28%,transparent)] md:h-[4.25rem] md:w-[4.25rem] md:text-[2rem]"
+                  aria-hidden
+                >
+                  📖
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-tamil text-lg font-bold leading-tight text-[var(--text)] md:text-xl">{w}</span>
+                    <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-[var(--accent)]">
+                      Practice
+                    </span>
+                  </div>
+                  {rom ? (
+                    <p className="mt-1.5 font-body text-sm font-medium text-[color-mix(in_srgb,var(--muted)_30%,var(--text))]">
+                      ({rom})
+                    </p>
+                  ) : null}
+                  <p className="mt-2 text-xs font-medium text-[var(--muted)]">Tap to load in Play →</p>
+                </div>
+              </button>
+            </li>
+          );
+        })}
       </ul>
-    </section>
+    </SummaryFold>
   );
 }

@@ -71,6 +71,37 @@ export function xpToNextLevel(xp: number): { level: number; currentStart: number
   return { level, currentStart, nextAt };
 }
 
+/** Judge-visible breakdown: total XP, level band, and distance to the next threshold. */
+export type LevelProgressSummary = {
+  level: number;
+  xp: number;
+  /** XP at the start of this level (inclusive). */
+  currentStart: number;
+  /** Total XP required to count as the next level (exclusive upper bound of this band). */
+  nextLevelAt: number;
+  /** XP earned within the current level band. */
+  xpIntoLevel: number;
+  /** XP still needed to reach `nextLevelAt`. */
+  xpToNext: number;
+  /** Level after crossing `nextLevelAt`. */
+  nextLevel: number;
+};
+
+export function levelProgressSummary(xp: number): LevelProgressSummary {
+  const { level, currentStart, nextAt } = xpToNextLevel(xp);
+  const xpIntoLevel = Math.max(0, xp - currentStart);
+  const xpToNext = Math.max(0, nextAt - xp);
+  return {
+    level,
+    xp,
+    currentStart,
+    nextLevelAt: nextAt,
+    xpIntoLevel,
+    xpToNext,
+    nextLevel: level + 1,
+  };
+}
+
 /** Advance calendar streak when the daily goal is met (once per day). */
 export function qualifyDailyStreakDay(): { streakDays: number } {
   const p = loadProgression();
