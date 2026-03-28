@@ -1,0 +1,2117 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ink & manuscript — warm dark base, amber accent, paper light mode */
+:root {
+  --bg: #12110f;
+  --card: #1c1b18;
+  --card-elevated: #242220;
+  --border: #2e2c28;
+  --border-muted: #252320;
+  --accent: #c9a227;
+  --accent-hover: #d4ae32;
+  --accent-muted: #8a7020;
+  --accent-ink: #1a1612;
+  --text: #ebe6dc;
+  --muted: #9c958a;
+  --muted-2: #6f6a62;
+  --success: #6b8f71;
+  --danger: #c45c4a;
+  --warning: #c9a227;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --confetti-a: #c9a227;
+  --confetti-b: #6b8f71;
+  --confetti-c: #b85c38;
+}
+
+body {
+  @apply antialiased text-ui-lg;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Lexifyd parchment shell — friend mockup (warm paper + forest green) */
+html.seren {
+  --bg: #f0ebe0;
+  --card: #faf7f2;
+  --card-elevated: #f4f0e8;
+  --border: #d8d0be;
+  --border-muted: #ede8dc;
+  --accent: #1f4a3a;
+  --accent-hover: #163628;
+  --accent-muted: #2d5a48;
+  /* Text on primary green buttons */
+  --accent-ink: #f0ebe0;
+  --text: #1a1a14;
+  --muted: #7a7260;
+  --muted-2: #8a826e;
+  --success: #1f7a4a;
+  --danger: #c0392b;
+  --warning: #c49a2a;
+  --gold: #c49a2a;
+  --gold-bg: #faf3e0;
+  --shadow-sm: 0 1px 2px rgba(26, 26, 20, 0.06);
+  --shadow-md: 0 8px 28px rgba(26, 26, 20, 0.08);
+  --confetti-a: #1f4a3a;
+  --confetti-b: #1f7a4a;
+  --confetti-c: #c49a2a;
+}
+
+html.seren body {
+  font-family: var(--font-dm), var(--font-manrope), system-ui, sans-serif;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+html.seren .lex-card {
+  border-color: var(--border);
+  background-color: var(--card);
+  box-shadow: var(--shadow-md);
+}
+
+html.seren .lex-input {
+  background-color: #ede8dc;
+  border-color: #c8bfaa;
+}
+
+html.seren .lex-btn-segment {
+  background-color: var(--card-elevated);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+html.seren .lex-sidebar {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--card) 88%, var(--accent)) 0%,
+    color-mix(in srgb, var(--card) 96%, var(--bg)) 48%,
+    var(--card) 100%
+  );
+  border-right: 2px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  box-shadow: 6px 0 28px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+html.seren .lex-sidebar-brand {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, var(--accent));
+  margin-bottom: 0.35rem;
+  padding-bottom: 1.1rem;
+}
+
+html.seren .lex-sidebar-nav-btn--active .lex-sidebar-nav-ic {
+  color: var(--accent);
+}
+
+html.seren .lex-sentence {
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-sentence {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-sentence {
+    font-size: 1.65rem;
+    line-height: 1.45;
+  }
+}
+
+html.seren .lex-option {
+  font-size: 1rem;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-option {
+    font-size: 1.0625rem;
+  }
+}
+
+@layer components {
+  .lex-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+    background-color: color-mix(in srgb, var(--card) 92%, transparent);
+    box-shadow: var(--shadow-md);
+  }
+  .lex-input {
+    @apply min-h-[48px] rounded-xl px-4 py-2.5 text-base outline-none transition-colors duration-200;
+    border: 1px solid var(--border);
+    background-color: var(--accent-ink);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+  }
+  .lex-input:focus-visible {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 42%, transparent);
+  }
+  .lex-btn-primary {
+    @apply min-h-[48px] rounded-xl px-5 py-3 text-base font-semibold shadow-lg transition-colors duration-200 disabled:opacity-50;
+    background-color: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .lex-btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+  }
+  .lex-btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--bg),
+      0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  .lex-btn-secondary {
+    @apply min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-medium transition-colors duration-200;
+    border-color: var(--border);
+    background-color: color-mix(in srgb, var(--card-elevated) 78%, transparent);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+  }
+  .lex-btn-secondary:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+    background-color: color-mix(in srgb, var(--card) 88%, transparent);
+    color: var(--text);
+  }
+  .lex-btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 42%, transparent);
+  }
+  .lex-btn-secondary:disabled {
+    opacity: 0.5;
+  }
+  .lex-btn-ghost {
+    @apply min-h-[48px] rounded-xl border border-transparent px-4 py-2.5 text-base font-medium transition-colors duration-200;
+    color: var(--muted);
+    background-color: transparent;
+  }
+  .lex-btn-ghost:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--card) 72%, transparent);
+    color: var(--text);
+  }
+  .lex-btn-ghost:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  /** Compact toggles / secondary row actions (mode chips, hint buttons) */
+  .lex-btn-segment {
+    @apply min-h-[44px] rounded-xl border px-4 py-2 text-ui font-medium transition-colors duration-200;
+    border-color: var(--border);
+    background-color: var(--accent-ink);
+    color: var(--muted);
+  }
+  .lex-btn-segment:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+    color: var(--text);
+  }
+  .lex-btn-segment:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 38%, transparent);
+  }
+  .lex-chip {
+    @apply min-h-[48px] rounded-xl px-4 py-3 text-left text-base transition-colors duration-200;
+    border: 1px solid var(--border);
+    background-color: color-mix(in srgb, var(--card-elevated) 80%, transparent);
+  }
+  .lex-chip:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .lex-option {
+    @apply min-h-[48px] rounded-xl border px-4 py-3.5 text-left font-tamil text-base transition-colors duration-200;
+  }
+  .lex-sentence {
+    @apply font-tamil text-xl leading-relaxed md:text-2xl;
+    color: var(--text);
+  }
+  .lex-nav-item {
+    @apply flex w-full min-h-[48px] items-center rounded-xl px-4 py-3 text-left text-base font-medium transition-colors duration-200;
+    color: var(--muted);
+  }
+  .lex-nav-item:hover {
+    background-color: color-mix(in srgb, var(--card) 70%, transparent);
+    color: var(--text);
+  }
+  .lex-nav-item-active {
+    background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .lex-sidebar {
+    background-color: color-mix(in srgb, var(--card) 55%, var(--bg));
+    border-color: var(--border);
+  }
+  .lex-mob-tab-idle:hover {
+    background-color: color-mix(in srgb, var(--card) 72%, transparent);
+    color: var(--text);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lex-btn-primary:active:not(:disabled),
+  .lex-btn-secondary:active:not(:disabled),
+  .lex-btn-ghost:active:not(:disabled),
+  .lex-btn-segment:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes lex-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lex-fade-in {
+  animation: lex-fade-in 0.38s ease-out both;
+}
+
+@keyframes slot-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-slot-shake {
+  animation: slot-shake 0.45s ease-in-out;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-12px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti-particle {
+  position: absolute;
+  top: -8px;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  animation: confetti-fall 2.2s ease-out forwards;
+}
+
+@keyframes wrong-burst-fall {
+  0% {
+    transform: translateY(-12px) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(70vh) scale(0.55) rotate(200deg);
+    opacity: 0;
+  }
+}
+
+.wrong-burst-particle {
+  position: absolute;
+  top: -8px;
+  width: 7px;
+  height: 10px;
+  border-radius: 2px;
+  animation: wrong-burst-fall 1.35s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slot-shake {
+    animation: none;
+  }
+  .confetti-particle {
+    animation: none;
+    opacity: 0;
+  }
+  .wrong-burst-particle {
+    animation: none;
+    opacity: 0;
+  }
+  .lex-fade-in {
+    animation: none;
+  }
+  .lex-duo-bounce,
+  .lex-duo-shake,
+  .lex-chip-spring,
+  .lex-game-flash--green,
+  .lex-game-flash--red {
+    animation: none !important;
+  }
+  html.seren .lex-result-modal-enter,
+  html.seren .lex-result-modal-shake {
+    animation: none !important;
+  }
+}
+
+/* Duolingo-style feedback (friend mockup) */
+@keyframes lex-duo-bounce {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  18% {
+    transform: scale(1.05) translateY(-4px);
+  }
+  36% {
+    transform: scale(0.98) translateY(0);
+  }
+  54% {
+    transform: scale(1.03) translateY(-2px);
+  }
+  72% {
+    transform: scale(0.99) translateY(0);
+  }
+  90% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lex-duo-shake {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  8% {
+    transform: translateX(-7px) rotate(-1.2deg);
+  }
+  18% {
+    transform: translateX(7px) rotate(1.2deg);
+  }
+  28% {
+    transform: translateX(-6px) rotate(-0.8deg);
+  }
+  38% {
+    transform: translateX(6px) rotate(0.8deg);
+  }
+  48% {
+    transform: translateX(-4px) rotate(-0.4deg);
+  }
+  58% {
+    transform: translateX(4px) rotate(0.4deg);
+  }
+  72% {
+    transform: translateX(-2px);
+  }
+  86% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+@keyframes lex-chip-spring {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  20% {
+    transform: translateY(-10px) scale(1.06);
+  }
+  45% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  65% {
+    transform: translateY(-6px) scale(1.04);
+  }
+  82% {
+    transform: translateY(-1px) scale(1.01);
+  }
+  100% {
+    transform: translateY(-2px) scale(1);
+  }
+}
+
+@keyframes lex-sflash-green {
+  0% {
+    opacity: 0.22;
+    background: var(--success);
+  }
+  40% {
+    opacity: 0.08;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lex-sflash-red {
+  0% {
+    opacity: 0.2;
+    background: var(--danger);
+  }
+  40% {
+    opacity: 0.06;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.lex-game-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  opacity: 0;
+  border-radius: inherit;
+}
+
+.lex-game-flash--green {
+  animation: lex-sflash-green 0.52s ease forwards;
+}
+
+.lex-game-flash--red {
+  animation: lex-sflash-red 0.52s ease forwards;
+}
+
+html.seren .lex-mcq-correct {
+  border-color: var(--success) !important;
+  background-color: color-mix(in srgb, var(--success) 16%, var(--card)) !important;
+  animation: lex-duo-bounce 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+html.seren .lex-mcq-wrong {
+  border-color: var(--danger) !important;
+  background-color: color-mix(in srgb, var(--danger) 12%, var(--card)) !important;
+  animation: lex-duo-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+html.seren .lex-chip-correct {
+  border-color: var(--success) !important;
+  background-color: color-mix(in srgb, var(--success) 14%, var(--card-elevated)) !important;
+  animation: lex-chip-spring 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+html.seren .lex-chip-wrong {
+  border-color: var(--danger) !important;
+  background-color: color-mix(in srgb, var(--danger) 12%, var(--card-elevated)) !important;
+  animation: lex-duo-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+html.seren .lex-mcq-correct .lex-mcq-num {
+  border-color: var(--success) !important;
+  background-color: var(--success) !important;
+  color: #fff !important;
+}
+
+html.seren .lex-mcq-wrong .lex-mcq-num {
+  border-color: var(--danger) !important;
+  background-color: var(--danger) !important;
+  color: #fff !important;
+}
+
+/* —— Friend mockup: home dashboard, modes, game deck —— */
+html.seren .lex-home-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 0 2rem;
+}
+
+html.seren .lex-home-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.125rem;
+  width: 100%;
+  max-width: none;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-home-grid {
+    grid-template-columns: 1fr minmax(300px, min(420px, 32vw));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  html.seren .lex-home-grid {
+    grid-template-columns: 1fr minmax(320px, min(480px, 28vw));
+    gap: 1.5rem;
+  }
+}
+
+html.seren .lex-hero {
+  background: var(--accent);
+  color: #f0ebe0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  grid-column: 1 / -1;
+}
+
+html.seren .lex-hero::before {
+  content: "";
+  position: absolute;
+  right: -30px;
+  top: -30px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+html.seren .lex-hero::after {
+  content: "";
+  position: absolute;
+  right: 70px;
+  bottom: -50px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+html.seren .lex-hero-kicker {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+html.seren .lex-hero-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+html.seren .lex-hero-title em {
+  font-style: normal;
+  opacity: 0.6;
+}
+
+html.seren .lex-hero-sub {
+  font-size: 13px;
+  opacity: 0.7;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  max-width: min(52ch, 100%);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1280px) {
+  html.seren .lex-hero-sub {
+    max-width: min(64ch, 55%);
+  }
+}
+
+html.seren .lex-hero-word-bg {
+  position: absolute;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-noto), "Noto Sans Tamil", sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.25rem);
+  font-weight: 700;
+  opacity: 0.1;
+  pointer-events: none;
+  line-height: 1;
+  transition: opacity 0.4s;
+}
+
+html.seren .lex-hero-actions {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+html.seren .lex-hero-btn {
+  background: #f0ebe0;
+  color: var(--accent);
+  border: none;
+  border-radius: 9px;
+  padding: 11px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-dm), sans-serif;
+  transition: all 0.2s;
+}
+
+html.seren .lex-hero-btn:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+html.seren .lex-hero-btn-ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f0ebe0;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+html.seren .lex-hero-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+html.seren .lex-stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  html.seren .lex-stats-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+html.seren .lex-stat-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.125rem;
+  transition: all 0.2s;
+}
+
+html.seren .lex-stat-card:hover {
+  border-color: #c8bfaa;
+  transform: translateY(-1px);
+}
+
+html.seren .lex-stat-val {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+html.seren .lex-stat-lbl {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+html.seren .lex-stat-delta {
+  font-size: 11px;
+  color: var(--success);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+html.seren .lex-section-lbl {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+html.seren .lex-section-lbl::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+html.seren .lex-panel {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+html.seren .lex-panel-head {
+  padding: 14px 18px;
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+html.seren .lex-panel-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+html.seren .lex-panel-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+html.seren .lex-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  display: inline-block;
+  margin-right: 4px;
+  animation: lex-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes lex-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+html.seren .lex-dw-row {
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1.5px solid var(--border);
+  cursor: default;
+  transition: background 0.15s;
+}
+
+html.seren .lex-dw-row:last-child {
+  border-bottom: none;
+}
+
+html.seren .lex-dw-row-click {
+  cursor: pointer;
+}
+
+html.seren .lex-dw-row-click:hover {
+  background: var(--border-muted);
+}
+
+html.seren .lex-dw-idx {
+  font-size: 11px;
+  color: #b0a890;
+  font-weight: 600;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+html.seren .lex-dw-ring {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  border: 2px solid;
+}
+
+html.seren .lex-dw-ring.done {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, var(--card));
+  color: var(--success);
+}
+
+html.seren .lex-dw-ring.cur {
+  border-color: var(--gold);
+  background: var(--gold-bg);
+  color: var(--gold);
+  animation: lex-rpulse 1.8s ease-in-out infinite;
+}
+
+html.seren .lex-dw-ring.lock {
+  border-color: #c8bfaa;
+  background: #e8e2d4;
+  color: #b0a890;
+}
+
+@keyframes lex-rpulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(196, 154, 42, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(196, 154, 42, 0);
+  }
+}
+
+html.seren .lex-dw-word {
+  font-family: var(--font-noto), "Noto Sans Tamil", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+html.seren .lex-dw-gloss {
+  font-size: 11px;
+  color: var(--muted);
+  max-width: 130px;
+  text-align: right;
+  line-height: 1.4;
+}
+
+html.seren .lex-dw-xp {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--gold-bg);
+  border: 1px solid rgba(196, 154, 42, 0.2);
+  border-radius: 5px;
+  padding: 2px 7px;
+}
+
+html.seren .lex-lb-row {
+  padding: 11px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1.5px solid var(--border);
+  transition: background 0.15s;
+}
+
+html.seren .lex-lb-row:last-child {
+  border-bottom: none;
+}
+
+html.seren .lex-lb-row:hover {
+  background: var(--border-muted);
+}
+
+html.seren .lex-lb-row-me {
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+
+html.seren .lex-lb-rank {
+  font-size: 12px;
+  font-weight: 700;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+html.seren .lex-lb-av {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: #f0ebe0;
+}
+
+html.seren .lex-lb-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+html.seren .lex-lb-sc {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+html.seren .lex-act-row {
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1.5px solid var(--border);
+}
+
+html.seren .lex-act-row:last-child {
+  border-bottom: none;
+}
+
+html.seren .lex-act-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+html.seren .lex-act-dot.ok {
+  background: color-mix(in srgb, var(--success) 14%, var(--card));
+}
+
+html.seren .lex-act-dot.bad {
+  background: color-mix(in srgb, var(--danger) 12%, var(--card));
+}
+
+html.seren .lex-act-dot.bd {
+  background: var(--gold-bg);
+}
+
+html.seren .lex-act-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+html.seren .lex-act-time {
+  font-size: 10px;
+  color: #b0a890;
+}
+
+html.seren .lex-wod {
+  background: #2e2e22;
+  color: #f0ebe0;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+html.seren .lex-wod-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+html.seren .lex-wod-word {
+  font-family: var(--font-noto), "Noto Sans Tamil", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 3px;
+  color: #e8dcc8;
+}
+
+html.seren .lex-wod-rom {
+  font-size: 11px;
+  opacity: 0.45;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+html.seren .lex-wod-m {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  opacity: 0.65;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+html.seren .lex-wod-num {
+  font-weight: 700;
+  opacity: 1;
+  color: #c8bfa8;
+  flex-shrink: 0;
+}
+
+html.seren .lex-modes-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 0 3rem;
+}
+
+html.seren .lex-modes-inner {
+  width: 100%;
+  max-width: none;
+}
+
+/* —— Play home + Modes: larger type, spacing, scroll-friendly —— */
+html.seren .lex-dashboard-xl .lex-home-scroll {
+  padding: 1.75rem 0 3.5rem;
+}
+
+html.seren .lex-dashboard-xl .lex-home-grid {
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-dashboard-xl .lex-home-grid {
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  html.seren .lex-dashboard-xl .lex-home-grid {
+    gap: 2rem;
+  }
+}
+
+html.seren .lex-dashboard-xl .lex-hero {
+  padding: 2.25rem 2.5rem;
+  border-radius: 20px;
+}
+
+html.seren .lex-dashboard-xl .lex-hero-kicker {
+  font-size: 12px;
+  letter-spacing: 2.2px;
+  margin-bottom: 0.65rem;
+}
+
+html.seren .lex-dashboard-xl .lex-hero-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  margin-bottom: 0.65rem;
+}
+
+html.seren .lex-dashboard-xl .lex-hero-sub {
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  max-width: min(62ch, 100%);
+}
+
+html.seren .lex-dashboard-xl .lex-hero-word-bg {
+  font-size: clamp(3.25rem, 11vw, 6rem);
+  right: 2rem;
+}
+
+html.seren .lex-dashboard-xl .lex-hero-btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 11px;
+  min-height: 48px;
+}
+
+html.seren .lex-dashboard-xl .lex-hero-actions {
+  gap: 0.75rem;
+}
+
+html.seren .lex-dashboard-xl .lex-stats-row {
+  gap: 1rem;
+}
+
+html.seren .lex-dashboard-xl .lex-stat-card {
+  padding: 1.35rem 1.5rem;
+  border-radius: 14px;
+}
+
+html.seren .lex-dashboard-xl .lex-stat-val {
+  font-size: 2.35rem;
+}
+
+html.seren .lex-dashboard-xl .lex-stat-lbl {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+html.seren .lex-dashboard-xl .lex-stat-delta {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+html.seren .lex-dashboard-xl .lex-section-lbl {
+  font-size: 11px;
+  letter-spacing: 2.2px;
+  margin-bottom: 1rem;
+}
+
+html.seren .lex-dashboard-xl .lex-panel-head {
+  padding: 18px 22px;
+}
+
+html.seren .lex-dashboard-xl .lex-panel-title {
+  font-size: 1.2rem;
+}
+
+html.seren .lex-dashboard-xl .lex-panel-sub {
+  font-size: 13px;
+}
+
+html.seren .lex-dashboard-xl .lex-live-dot {
+  width: 8px;
+  height: 8px;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-row {
+  padding: 16px 22px;
+  gap: 14px;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-idx {
+  font-size: 13px;
+  width: 22px;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-ring {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-word {
+  font-size: 1.35rem;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-gloss {
+  font-size: 13px;
+  max-width: min(220px, 38vw);
+  line-height: 1.45;
+}
+
+html.seren .lex-dashboard-xl .lex-dw-xp {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+html.seren .lex-dashboard-xl .lex-lb-row {
+  padding: 14px 22px;
+  gap: 12px;
+}
+
+html.seren .lex-dashboard-xl .lex-lb-rank {
+  font-size: 14px;
+  width: 26px;
+}
+
+html.seren .lex-dashboard-xl .lex-lb-av {
+  width: 34px;
+  height: 34px;
+  font-size: 13px;
+}
+
+html.seren .lex-dashboard-xl .lex-lb-name {
+  font-size: 15px;
+}
+
+html.seren .lex-dashboard-xl .lex-lb-sc {
+  font-size: 14px;
+}
+
+html.seren .lex-dashboard-xl .lex-act-row {
+  padding: 14px 22px;
+  gap: 12px;
+}
+
+html.seren .lex-dashboard-xl .lex-act-dot {
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+html.seren .lex-dashboard-xl .lex-act-text {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+html.seren .lex-dashboard-xl .lex-act-time {
+  font-size: 12px;
+}
+
+html.seren .lex-dashboard-xl .lex-wod {
+  padding: 1.75rem 1.5rem;
+  border-radius: 18px;
+}
+
+html.seren .lex-dashboard-xl .lex-wod-label {
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+
+html.seren .lex-dashboard-xl .lex-wod-word {
+  font-size: 2.5rem;
+}
+
+html.seren .lex-dashboard-xl .lex-wod-rom {
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+html.seren .lex-dashboard-xl .lex-wod-m {
+  font-size: 15px;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+html.seren .lex-dashboard-xl .lex-modes-scroll {
+  padding: 1.75rem 0 4.5rem;
+}
+
+html.seren .lex-dashboard-xl .lex-g-card-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+html.seren .lex-header-comfort .lex-kicker-trk {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: color-mix(in srgb, var(--muted) 55%, var(--text));
+}
+
+html.seren .lex-header-comfort .lex-title-main {
+  font-size: clamp(1.95rem, 3.8vw, 2.5rem);
+}
+
+html.seren .lex-header-comfort .lex-desc-main {
+  font-size: clamp(15px, 1.35vw, 17px);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  max-width: 52rem;
+  color: color-mix(in srgb, var(--text) 78%, var(--muted));
+}
+
+/* Summary / Explore: readable header without full dashboard “comfort” chrome */
+html.seren header:not(.lex-header-comfort) .lex-kicker-trk {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--muted) 50%, var(--text));
+}
+
+html.seren header:not(.lex-header-comfort) .lex-title-main {
+  font-size: clamp(1.75rem, 2.9vw, 2.15rem);
+}
+
+html.seren header:not(.lex-header-comfort) .lex-desc-main {
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.55;
+  margin-top: 0.45rem;
+  max-width: 48rem;
+  color: color-mix(in srgb, var(--text) 76%, var(--muted));
+}
+
+html.seren .lex-header-comfort {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-header-comfort {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+html.seren .lex-header-comfort .lex-header-pill {
+  min-height: 44px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 14px;
+}
+
+html.seren .lex-header-comfort .lex-header-icon-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+html.seren .lex-player-strip-comfort {
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+  gap: 1rem 1.25rem;
+}
+
+html.seren .lex-player-strip-comfort .lex-p-av {
+  width: 3rem;
+  height: 3rem;
+  font-size: 15px;
+}
+
+html.seren .lex-player-strip-comfort .lex-p-name-input {
+  font-size: 1.05rem;
+  max-width: 280px;
+}
+
+html.seren .lex-player-strip-comfort .lex-p-hint {
+  font-size: 13px;
+}
+
+html.seren .lex-player-strip-comfort .lex-p-sub {
+  font-size: 13px;
+}
+
+html.seren .lex-player-strip-comfort .lex-streak-pill {
+  font-size: 14px;
+  padding: 0.4rem 0.85rem;
+}
+
+html.seren .lex-player-strip-comfort .lex-daily-lbl {
+  font-size: 11px;
+}
+
+html.seren .lex-player-strip-comfort .lex-xp-lbl {
+  font-size: 11px;
+}
+
+html.seren .lex-player-strip-comfort .lex-bar-track {
+  height: 9px;
+}
+
+html.seren .lex-player-strip-comfort .lex-xp-bar-wrap {
+  width: 160px;
+}
+
+@media (min-width: 768px) {
+  html.seren .lex-player-strip-comfort .lex-xp-bar-wrap {
+    width: 180px;
+  }
+}
+
+html.seren .lex-player-strip-comfort .lex-lvl-badge {
+  font-size: 14px;
+  padding: 0.45rem 1rem;
+}
+
+html.seren .lex-player-strip-comfort .lex-daily-wrap {
+  min-width: 0;
+  flex: 1 1 220px;
+  max-width: none;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-player-strip-comfort .lex-daily-wrap {
+    max-width: 420px;
+  }
+}
+
+html.seren .lex-app-tabs-comfort button {
+  min-height: 52px;
+  font-size: 15px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+html.seren .lex-footer-comfort {
+  margin-top: 3.5rem;
+  padding-top: 2.25rem;
+  padding-bottom: 2.5rem;
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  line-height: 1.65;
+}
+
+html.seren .lex-game-shell-comfort h3.lex-pathway-heading {
+  font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+  margin-bottom: 0.35rem;
+}
+
+html.seren .lex-game-shell-comfort .lex-pathway-grid {
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  html.seren .lex-game-shell-comfort .lex-pathway-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-game-shell-comfort .lex-pathway-grid {
+    gap: 1.5rem;
+  }
+}
+
+html.seren .lex-game-shell-comfort .lex-pathway-tile {
+  padding: 1.35rem 1.25rem;
+  border-radius: 1rem;
+  min-height: 8.5rem;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-game-shell-comfort .lex-pathway-tile {
+    padding: 1.75rem 1.5rem;
+    min-height: 10rem;
+  }
+}
+
+html.seren .lex-game-shell-comfort .lex-pathway-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-game-shell-comfort .lex-pathway-icon {
+    font-size: 2.75rem;
+    margin-bottom: 0.85rem;
+  }
+}
+
+html.seren .lex-game-shell-comfort .lex-pathway-label {
+  font-size: 1.15rem;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-game-shell-comfort .lex-pathway-label {
+    font-size: 1.25rem;
+  }
+}
+
+html.seren .lex-game-shell-comfort .lex-pathway-actions button {
+  min-height: 52px;
+  padding: 0.85rem 1.35rem;
+  font-size: 16px;
+}
+
+html.seren .lex-game-shell-comfort .lex-run-stats-grid {
+  padding: 1.25rem 1.35rem;
+  gap: 1rem;
+}
+
+html.seren .lex-game-shell-comfort .lex-run-stats-grid p:first-child {
+  font-size: 12px;
+}
+
+html.seren .lex-game-shell-comfort .lex-run-stats-grid .font-display {
+  font-size: 1.65rem;
+}
+
+html.seren .lex-game-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  html.seren .lex-game-cols {
+    grid-template-columns: 1fr minmax(280px, min(380px, 34vw));
+  }
+}
+
+html.seren .lex-g-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+html.seren .lex-g-card-title {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+@keyframes lex-modal-result-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lex-modal-result-shake {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1) translateY(0) translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+html.seren .lex-result-modal-enter {
+  animation: lex-modal-result-enter 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+html.seren .lex-result-modal-shake {
+  animation: lex-modal-result-shake 0.58s ease-in-out forwards;
+}
+
+html.seren .lex-result-modal-card.lex-result-modal--ok {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--card) 90%, var(--success));
+}
+
+html.seren .lex-result-modal-card.lex-result-modal--bad {
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--card) 90%, var(--danger));
+}
+
+html.seren .lex-result-b-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+html.seren .lex-result-modal--ok .lex-result-b-icon {
+  background: var(--success);
+}
+
+html.seren .lex-result-modal--bad .lex-result-b-icon {
+  background: var(--danger);
+}
+
+html.seren .lex-result-b-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+html.seren .lex-result-modal--ok .lex-result-b-title {
+  color: var(--success);
+}
+
+html.seren .lex-result-modal--bad .lex-result-b-title {
+  color: var(--danger);
+}
+
+html.seren .lex-result-b-explain {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+html.seren .lex-result-modal-btn {
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-dm), sans-serif;
+}
+
+html.seren .lex-result-modal--ok .lex-result-modal-btn {
+  background: var(--success);
+}
+
+html.seren .lex-result-modal--bad .lex-result-modal-btn {
+  background: var(--danger);
+}
+
+html.seren .lex-hint-row {
+  display: flex;
+  gap: 8px;
+}
+
+html.seren .lex-hint-btn {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-dm), sans-serif;
+  transition: all 0.18s;
+}
+
+html.seren .lex-hint-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+  color: var(--accent);
+}
+
+html.seren .lex-hint-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+html.seren .lex-hint-cost {
+  margin-left: auto;
+  background: var(--border-muted);
+  color: var(--muted);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+}
+
+html.seren .lex-mcq-parch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Parchment game: in-canvas HUD (mockup) */
+html.seren .lex-parch-hud {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+html.seren .lex-parch-hud-badge {
+  background: var(--accent);
+  color: #f0ebe0;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+html.seren .lex-parch-hud-word {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15em 0.35em;
+  font-family: var(--font-noto), "Noto Sans Tamil", sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+html.seren .lex-parch-hud-word .font-body {
+  font-size: clamp(0.72rem, 1.8vw, 0.9rem);
+  font-weight: 500;
+}
+
+html.seren .lex-parch-hud-div {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+html.seren .lex-parch-hud-stat {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+html.seren .lex-parch-hud-sv {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+html.seren .lex-parch-hud-sl {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+html.seren .lex-parch-hud-prog {
+  flex: 1;
+  min-width: 140px;
+}
+
+html.seren .lex-parch-hud-pl {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+html.seren .lex-parch-hud-dots {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+html.seren .lex-parch-hud-dot {
+  height: 7px;
+  border-radius: 4px;
+  background: #e8e2d4;
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+  width: 22px;
+}
+
+html.seren .lex-parch-hud-dot.done {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+html.seren .lex-parch-hud-dot.cur {
+  background: var(--gold);
+  border-color: var(--gold);
+  width: 28px;
+  animation: lex-dpulse 1.2s ease-in-out infinite;
+}
+
+@keyframes lex-dpulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+html.seren .lex-game-area-parch {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 7rem;
+}
+
+html.light {
+  --bg: #f6f3ec;
+  --card: #fffdf8;
+  --card-elevated: #ffffff;
+  --border: #e8e4dc;
+  --border-muted: #e0dbd2;
+  --accent: #9a7312;
+  --accent-hover: #b38614;
+  --accent-muted: #7a5c0e;
+  --accent-ink: #1a1816;
+  --text: #1a1816;
+  --muted: #5c574e;
+  --muted-2: #8a8478;
+  --success: #3d6b47;
+  --danger: #a84838;
+  --confetti-a: #9a7312;
+  --confetti-b: #3d6b47;
+  --confetti-c: #a84838;
+}
+
+html.light .lex-card {
+  border-color: var(--border);
+  background-color: var(--card);
+  box-shadow: 0 4px 20px rgba(26, 24, 22, 0.06);
+}
+
+html.light .lex-sidebar {
+  background-color: #f0ebe3;
+}
+
+/* ========== Post-login entry intro (LexEntryIntro) ========== */
+html.seren .lex-entry-intro-bg {
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, #e8e2d0 0%, #f0ebe0 50%, #faf7f2 100%);
+}
+
+html.seren .lex-entry-lp {
+  bottom: 0;
+  animation: lex-entry-lpdrift linear infinite;
+  opacity: 0;
+}
+
+@keyframes lex-entry-lpdrift {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100px) translateX(calc(var(--dx) * 80px)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+html.seren .lex-entry-lineload {
+  animation: lex-entry-lineload 0.8s ease forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes lex-entry-lineload {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+html.seren .lex-entry-bgpan {
+  animation: lex-entry-bgpan 20s linear infinite;
+}
+
+@keyframes lex-entry-bgpan {
+  0% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(-200px);
+  }
+}
+
+html.seren .lex-entry-logo-glow {
+  background: radial-gradient(ellipse, rgba(31, 74, 58, 0.2) 0%, transparent 70%);
+  animation: lex-entry-glowpulse 3s ease-in-out infinite;
+}
+
+@keyframes lex-entry-glowpulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+html.seren .lex-entry-logoin {
+  animation: lex-entry-logoin 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes lex-entry-logoin {
+  from {
+    transform: scale(0.6) translateY(30px);
+    opacity: 0;
+    filter: blur(20px);
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+html.seren .lex-entry-titlein {
+  animation: lex-entry-titlein 1s ease 0.9s both;
+}
+
+@keyframes lex-entry-titlein {
+  from {
+    opacity: 0;
+    letter-spacing: 0.75em;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.5em;
+    filter: blur(0);
+  }
+}
+
+html.seren .lex-entry-fadein-delayed {
+  animation: lex-entry-fadein 0.8s ease 1.4s both;
+}
+
+html.seren .lex-entry-fadein-bar {
+  animation: lex-entry-fadein 0.6s ease 1.8s both;
+}
+
+html.seren .lex-entry-fadein-bar2 {
+  animation: lex-entry-fadein 0.6s ease 2s both;
+}
+
+@keyframes lex-entry-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.seren .lex-entry-lp,
+  html.seren .lex-entry-lineload,
+  html.seren .lex-entry-bgpan,
+  html.seren .lex-entry-logo-glow,
+  html.seren .lex-entry-logoin,
+  html.seren .lex-entry-titlein,
+  html.seren .lex-entry-fadein-delayed,
+  html.seren .lex-entry-fadein-bar,
+  html.seren .lex-entry-fadein-bar2 {
+    animation: none !important;
+  }
+
+  html.seren .lex-entry-lineload {
+    transform: scaleX(1);
+  }
+}
+
+/* ========== Mode splash overlay ========== */
+html.seren .lex-ms-seal::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--ms-seal-border, rgba(42, 138, 80, 0.4));
+  animation: lex-ms-seal-rotate 8s linear infinite;
+}
+
+html.seren .lex-ms-seal::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px solid var(--ms-seal-border, rgba(42, 138, 80, 0.4));
+  opacity: 0.3;
+  animation: lex-ms-seal-rotate 14s linear infinite reverse;
+}
+
+@keyframes lex-ms-seal-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html.seren .lex-mode-splash-msp {
+  animation: lex-msp-float linear infinite;
+  opacity: 0;
+}
+
+@keyframes lex-msp-float {
+  0% {
+    transform: translateY(110%) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-10%) translateX(calc(var(--dx) * 60px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+html.seren .lex-mode-splash-ring {
+  animation: lex-ms-ring 4s ease-in-out infinite;
+}
+
+@keyframes lex-ms-ring {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+}
+
+html.seren .lex-mode-splash-pop {
+  animation: lex-ms-pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes lex-ms-pop {
+  from {
+    transform: scale(0.7) translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.seren .lex-ms-seal::before,
+  html.seren .lex-ms-seal::after,
+  html.seren .lex-mode-splash-msp,
+  html.seren .lex-mode-splash-ring,
+  html.seren .lex-mode-splash-pop {
+    animation: none !important;
+  }
+
+  html.seren .lex-mode-splash-msp {
+    opacity: 0.35;
+  }
+
+  html.seren .lex-mode-splash-pop {
+    opacity: 1;
+    transform: none;
+  }
+}
