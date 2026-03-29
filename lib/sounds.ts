@@ -1,5 +1,19 @@
 let ctx: AudioContext | null = null;
 
+/** Master gain for all SFX (connect through this bus so levels stay balanced). */
+const SFX_MASTER_GAIN = 1.85;
+
+let sfxMaster: GainNode | null = null;
+
+function getSfxMaster(c: AudioContext): GainNode {
+  if (!sfxMaster) {
+    sfxMaster = c.createGain();
+    sfxMaster.gain.value = SFX_MASTER_GAIN;
+    sfxMaster.connect(c.destination);
+  }
+  return sfxMaster;
+}
+
 export function getAudioContext(): AudioContext | null {
   if (typeof window === "undefined") return null;
   if (!ctx) ctx = new AudioContext();
@@ -34,7 +48,7 @@ function scheduleTone(
   g.gain.linearRampToValueAtTime(peakGain, t0 + 0.01);
   g.gain.exponentialRampToValueAtTime(0.001, t0 + duration);
   o.connect(g);
-  g.connect(c.destination);
+  g.connect(getSfxMaster(c));
   o.start(t0);
   o.stop(t0 + duration + 0.05);
 }
@@ -48,7 +62,7 @@ function beep(freq: number, duration: number, type: OscillatorType = "sine", gai
   o.frequency.value = freq;
   g.gain.value = gain;
   o.connect(g);
-  g.connect(c.destination);
+  g.connect(getSfxMaster(c));
   o.start();
   o.stop(c.currentTime + duration);
 }
